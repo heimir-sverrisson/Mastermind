@@ -5,6 +5,8 @@ import sys
 import logging
 import threading
 
+from mastermind_player import MastermindPlayer
+
 
 class MastermindServer:
     """
@@ -20,12 +22,18 @@ class MastermindServer:
 
     def accept_client(self, connection_socket, addr):
         logging.debug(f'Accepted connection from: {addr}')
+        player = MastermindPlayer()
         with connection_socket as s:
             while True:
                 data = s.recv(100).decode('utf-8').strip()
                 if len(data) == 0:
                     break
                 logging.debug(f'received: {data}')
+                (done, grade) = player.grade(data)
+                s.send(grade.encode('utf-8'))
+                if done:
+                    break
+
         connection_socket.close()
         logging.debug(f'Closed connection from: {addr}')
 
