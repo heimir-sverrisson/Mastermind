@@ -56,6 +56,8 @@ repo and run:
 You will see debug messages from the server in this terminal, including the random
 colors it picked.
 
+## Using a Telnet client
+
 In a separate terminal run the telnet program to connect to the server:
 
 ```shell
@@ -69,4 +71,17 @@ guess right (or cheat by looking at the server log), the server will respond wit
 
 If you want to quit the telnet client you can hit `control-]` and type `quit` at the
 telnet prompt.
+
+## Using the test client
+
+From the `Python` directory open a separate terminal to run the client:
+
+```shell
+./mastermind_client localhost 4321
+```
+
+Then enter your guess as a single line of four numbers separated by spaces
+and the server will respond with a line of two numbers as described above. If you
+guess right (or cheat by looking at the server log), the server will respond with
+`4 4` and close the connection.
 
