@@ -28,10 +28,12 @@ class MastermindPlayer:
             return (False, '0 0\r\n')
         correct_colors = 0
         correct_location = 0
+        remaining_colors = self.colors.copy()
         for i in range(self.LIST_SIZE):
             int_color = int(client_colors[i])
-            if int(int_color) in self.colors:
+            if int_color in remaining_colors:
                 correct_colors += 1
+                remaining_colors.remove(int_color)
             if int_color == self.colors[i]:
                 correct_location += 1;
         done = (correct_colors == 4) and (correct_location == 4)
